@@ -71,16 +71,36 @@ v0c2 = cross_skew(omega0_01)*r0p + cross_skew(omega0_02)*r0c2
 # Define kinetic energy of each link
 K1 = 0.5*m1*vsq(v0c1) + 0.5*I1*vsq(omega0_01)
 K2 = 0.5*m2*vsq(v0c2) + 0.5*I2*vsq(omega0_02)
+print('=======================================================================')
+print('Kinetic Energy:')
+pprint(K1[0]+K2[0])
+print('=======================================================================')
 
 # Define the potential energy of each link
 P1 = m1*g*lc1*sin(q1)
 P2 = m2*g*(l1*sin(q1) + lc2*sin(q1+q2))
+print('=======================================================================')
+print('Potential Energy:')
+pprint(P1+P2)
+print('=======================================================================')
 
 # Define the Lagrangian
 L = (K1[0]+K2[0]) - (P1+P2)
+print('=======================================================================')
+print('Lagrangian')
+pprint(L)
+print('=======================================================================')
 
 # Solve equations of motion
 eq_motion1 = simplify(Eq(diff(diff(L,dq1),t)-diff(L,q1),0))
-eq_motion1 = simplify(Eq(diff(diff(L,dq1),t)-diff(L,q1),tau))
+eq_motion2 = simplify(Eq(diff(diff(L,dq2),t)-diff(L,q2),tau))
 
+print('=======================================================================')
+print('EoM1:')
 pprint(eq_motion1)
+print('=======================================================================')
+
+print('=======================================================================')
+print('EoM2:')
+pprint(eq_motion2)
+print('=======================================================================')
